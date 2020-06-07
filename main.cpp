@@ -34,6 +34,44 @@ int main() {
     nodo_aux3->potencia = 125;
     InsertarclaveArbol(abeto, nodo_aux3);
 
+    struct nodoA *nodo_aux4;
+    nodo_aux4 = new struct nodoA;
+    nodo_aux4->matricula = "1010ZZZ";
+    nodo_aux4->tipo_vehiculo = 'G';
+    nodo_aux4->marca = "BMW";
+    nodo_aux4->modelo = "320D";
+    nodo_aux4->potencia = 125;
+    InsertarclaveArbol(abeto, nodo_aux4);
+
+    struct nodoA *nodo_aux6;
+    nodo_aux6 = new struct nodoA;
+    nodo_aux6->matricula = "2000AAA";
+    nodo_aux6->tipo_vehiculo = 'G';
+    nodo_aux6->marca = "FIAT";
+    nodo_aux6->modelo = "55";
+    nodo_aux6->potencia = 125;
+    InsertarclaveArbol(abeto, nodo_aux6);
+
+    struct nodoA *nodo_aux5;
+    nodo_aux5 = new struct nodoA;
+    nodo_aux5->matricula = "1999AAA";
+    nodo_aux5->tipo_vehiculo = 'G';
+    nodo_aux5->marca = "FIAT";
+    nodo_aux5->modelo = "55";
+    nodo_aux5->potencia = 125;
+    InsertarclaveArbol(abeto, nodo_aux5);
+
+    struct nodoA *nodo_aux7;
+    nodo_aux7 = new struct nodoA;
+    nodo_aux7->matricula = "2001AAA";
+    nodo_aux7->tipo_vehiculo = 'G';
+    nodo_aux7->marca = "FIAT";
+    nodo_aux7->modelo = "55";
+    nodo_aux7->potencia = 125;
+    InsertarclaveArbol(abeto, nodo_aux7);
+
+
+
     cout << "Tipo de vehículo: {G,D,M,I}" << endl;
 //    InsertarclaveArbol(abeto, "5555PPP");
 //    InsertarclaveArbol(abeto, "9999ZZZ");
@@ -129,11 +167,11 @@ int main() {
             *******************************************************************************/
             cout << "\nRecorridos Preorden, Inorden y Postorden:" << endl;
             cout << "\nPreorden:" << endl;
-            preorden(abeto->raiz);
+            Preorden(abeto->raiz);
             cout << "\nInorden:" << endl;
-            inorden(abeto->raiz);
+            Inorden(abeto->raiz);
             cout << "\nPostorden:" << endl;
-            postorden(abeto->raiz);
+            Postorden(abeto->raiz);
 
 
         }else if(option == 'D'){
@@ -141,18 +179,10 @@ int main() {
             /*******************************************************************************
             D)  Determinar el grado del árbol (número de nodos que tiene)
             *******************************************************************************/
-            // NOTA: La definición de grado de un árbol:
-            // Grado de un árbol: se corresponde con el máximo del grado de sus nodos.
-            // - Árboles binarios: árboles de grado 2 (máximo de 2 hijos por nodo)
 
-            int grado, total;
+            int total;
 
-            cout << "Estadísticas" << endl;
-
-            grado = calcularGradoArbol(abeto->raiz);
-            cout << "Grado del arbol:" << grado << endl;
-
-            total = calcularNumNodos(abeto->raiz);
+            total = CalcularNumNodos(abeto->raiz);
             cout << "Numero de nodos del arbol:" << total << endl;
 
         }else if(option == 'E'){
@@ -162,7 +192,10 @@ int main() {
                 nodo raíz hasta el nodo hoja que se encuentre en un nivel más inferior).
             *******************************************************************************/
 
-            // code...
+            int altura;
+
+            altura = CalcularAltura(abeto->raiz);
+            cout << "Altura del arbol:" << altura << endl;
 
         }else if(option == 'F'){
 
@@ -172,6 +205,20 @@ int main() {
             *******************************************************************************/
 
             // code...
+            string matricula;
+            bool resp;
+
+            // Pedir datos por teclado
+            cout << "Matricula: " << endl;
+            cin >> matricula;
+
+            BorrarNodoArbol(abeto, NULL, abeto->raiz, matricula);
+
+//            if(resp){ // Si el vehículo existe
+//                cout << "Borrado con éxito" << endl;
+//            }else{
+//                cout << "No existe el vehiculo" << endl;
+//            }
 
         }else if(option == 'G'){
 
@@ -180,7 +227,61 @@ int main() {
                 insertarlos en el árbol.
             *******************************************************************************/
 
-            // code...
+            //Dataset vehículos
+            struct VEHICULO vehiculos[37] = {
+                    {"AUDI", "A4 2.0 TFSI", 211, 'G'},
+                    {"AUDI", "A4 2.0 TDI", 140, 'D'},
+                    {"AUDI", "A5 Sportback 3.0 TFSI", 272, 'G'},
+                    {"BMW", "118i", 136, 'G'},
+                    {"BMW", "320i", 184, 'G'},
+                    {"BMW", "320d", 184, 'D'},
+                    {"CITROEN", "Xantia Activa 3.0 V6", 196, 'G'},
+                    {"CITROEN", "Xantia 2.0 HDI", 110, 'D'},
+                    {"CITROEN", "CX GTI turbo 2", 90, 'D'},
+                    {"DELOREAN", "DMC-12", 132, 'G'},
+                    {"FIAT", "Multipla 7.0 V8", 1000, 'G'},
+                    {"FORD", "Fiesta 1.4 TDCI", 70, 'D'},
+                    {"FORD", "Model T", 20, 'G'},
+                    {"JEEP", "Wrangler Sahara 4.0", 190, 'G'},
+                    {"MERCEDES-BENZ", "C220 CDI", 143, 'D'},
+                    {"MERCEDES-BENZ", "300 SL", 243, 'G'},
+                    {"PEUGEOT", "308 GTi", 263, 'G'},
+                    {"RENAULT", "Clio 1.5 dci", 100, 'D'},
+                    {"RENAULT", "Laguna 1.9 dci", 119, 'D'},
+                    {"SEAT", "Ibiza 1.4 TDI", 65, 'D'},
+                    {"VOLKSWAGEN", "Polo 1.4 TDI", 80, 'D'},
+                    {"APRILIA", "RS 660", 100, 'M'},
+                    {"BMW", "F900XR", 105, 'M'},
+                    {"HONDA", "CBR 600", 95, 'M'},
+                    {"HONDA", "CB 650", 108, 'M'},
+                    {"HONDA", "NC750X", 120, 'M'},
+                    {"SUZUKI", "Marauder 250", 20, 'M'},
+                    {"SUZUKI", "GSX 750", 95, 'M'},
+                    {"SUZUKI", "Intruder C800", 75, 'M'},
+                    {"EBRO", "470", 10, 'I'},
+                    {"EBRO", "6067", 15, 'I'},
+                    {"IVECO", "Eurocargo", 320, 'I'},
+                    {"RENAULT", "T HIGH", 520, 'I'},
+                    {"VOLVO", "FH16", 750, 'I'},
+                    {"VOLVO", "FH", 450, 'I'},
+                    {"VOLVO", "FMX", 330, 'I'},
+                    {"VOLVO", "FMX", 330, 'I'},
+            };
+
+            int index;
+
+            for (int i=0 ; i<10 ; i++){
+                index = (rand() % (sizeof(vehiculos)/sizeof(VEHICULO)) );
+
+                struct nodoA *nodo_aux;
+                nodo_aux = new struct nodoA;
+                nodo_aux->matricula = generateID();
+                nodo_aux->tipo_vehiculo = vehiculos[index].tipo_vehiculo;
+                nodo_aux->marca = vehiculos[index].marca;
+                nodo_aux->modelo = vehiculos[index].modelo;
+                nodo_aux->potencia = vehiculos[index].potencia;
+                InsertarclaveArbol(abeto, nodo_aux);
+            }
 
         }else if(option == 'H'){
 
@@ -188,8 +289,19 @@ int main() {
             H)  Generar al azar 10 matrículas de vehículos y borrar los vehículos
                 correspondientes, si existen, del árbol.
             *******************************************************************************/
-
-            // code...
+            string matricula;
+            cout << "Matriculas generadas: " << endl;
+            for (int i=0 ; i<10 ; i++){
+                matricula = generateID();
+                cout << i << ": " << matricula;
+                if(BusquedaclaveArbol(abeto->raiz,matricula)){
+                    //borrar aux
+                    cout << " - Matricula " << i << " coincide! Procedemos al borrado" << endl;
+                    BorrarNodoArbol(abeto, NULL, abeto->raiz, matricula);
+                }else{
+                    cout << " - No existe " << endl;
+                }
+            }
 
         }
 

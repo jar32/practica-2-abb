@@ -59,16 +59,16 @@ Función para determinar si un valor existe en el árbol
 ***********************************************************************/
 
 
-bool BusquedaclaveArbol(nodoarbol nodo, nodoA *item)
+bool BusquedaclaveArbol(nodoarbol nodo, string matricula)
 {
     if (nodo == NULL) return(false);
     else
     {
-        if (nodo->matricula == item->matricula) return(true);
+        if (nodo->matricula == matricula) return(true);
         else
         {
-            if (nodo->matricula < item->matricula) return(BusquedaclaveArbol(nodo->der,item));
-            else return(BusquedaclaveArbol(nodo->izq,item));
+            if (nodo->matricula < matricula) return(BusquedaclaveArbol(nodo->der,matricula));
+            else return(BusquedaclaveArbol(nodo->izq,matricula));
         };
     };
 }
@@ -159,61 +159,170 @@ nodoarbol DevolverclaveArbol(nodoarbol nodo, string matricula)
 Funciones de recorrido Pre, In y Post orden
 ***********************************************************************/
 
-void preorden(nodoarbol nodo){
+void Preorden(nodoarbol nodo){
     if (nodo != NULL) {
-        cout << nodo->matricula << endl;
-        preorden(nodo->izq);
-        preorden(nodo->der);
+        cout << nodo->matricula << ": " << nodo->marca << " " << nodo->modelo << endl;
+        Preorden(nodo->izq);
+        Preorden(nodo->der);
     }
 }
 
-void inorden(nodoarbol nodo){
+void Inorden(nodoarbol nodo){
     if (nodo != NULL) {
-        inorden(nodo->izq);
-        cout << nodo->matricula << endl;
-        inorden(nodo->der);
+        Inorden(nodo->izq);
+        cout << nodo->matricula << ": " << nodo->marca << " " << nodo->modelo << endl;
+        Inorden(nodo->der);
     }
 }
 
-void postorden(nodoarbol nodo){
+void Postorden(nodoarbol nodo){
     if (nodo != NULL){
-        postorden(nodo->izq);
-        postorden(nodo->der);
-        cout << nodo->matricula << endl;
+        Postorden(nodo->izq);
+        Postorden(nodo->der);
+        cout << nodo->matricula << ": " << nodo->marca << " " << nodo->modelo << endl;
     }
-}
-
-/***********************************************************************
-Grado de un árbol: se corresponde con el máximo del grado de sus nodos.
-***********************************************************************/
-
-int calcularGradoArbol(nodoarbol nodo){
-    if (nodo == NULL)
-        return 0;
-
-    // profundidad en los dos caminos
-    int maxIzq = calcularGradoArbol(nodo->izq);
-    int maxDer = calcularGradoArbol(nodo->der);
-
-    // devolver el máximo
-    if (maxIzq > maxDer)
-        return maxIzq + 1;
-    else
-        return maxDer + 1;
 }
 
 /***********************************************************************
 Número de nodos de un árbol
 ***********************************************************************/
 
-int calcularNumNodos(nodoarbol nodo){
+int CalcularNumNodos(nodoarbol nodo){
     int cont = 1; //El nodo raiz se cuenta
     if (nodo == NULL)
         return 0;
     else
     {
-        cont += calcularNumNodos(nodo->izq);
-        cont += calcularNumNodos(nodo->der);
+        cont += CalcularNumNodos(nodo->izq);
+        cont += CalcularNumNodos(nodo->der);
         return cont;
+    }
+}
+
+/***********************************************************************
+Funciones para calcular Altura del árbol: calcularAltura()
+ y profundidad()
+***********************************************************************/
+
+int Profundidad(nodoarbol nodo, int nivel){
+    int maxIzq = nivel;
+    int maxDer = nivel;
+
+    // hay que calcular profundidad en los dos caminos
+    if(nodo != NULL){
+        maxIzq = std::max(maxIzq, Profundidad(nodo->izq, nivel + 1));
+        maxDer = std::max(maxDer, Profundidad(nodo->der, nivel + 1));
+    }
+
+    // devolver el máximo valor
+    return std::max(maxIzq, maxDer);
+}
+
+int CalcularAltura(nodoarbol nodo){
+    if (nodo == NULL)
+        return 0;
+
+    int maxIzq = 0;
+    int maxDer = 0;
+
+    // hay que calcular profundidad en los dos caminos
+    if(nodo != NULL){
+        maxIzq = std::max(maxIzq, Profundidad(nodo->izq, 0));
+        maxDer = std::max(maxDer, Profundidad(nodo->der, 0));
+    }
+
+    // devolver el máximo valor
+    return std::max(maxIzq, maxDer);
+
+}
+
+
+/***********************************************************************
+Función borrar un nodo
+***********************************************************************/
+
+nodoarbol ExtremoIzquierdo(nodoarbol padre, nodoarbol nodo){
+
+    if(nodo->izq == NULL){
+        return padre;
+    }else{
+        ExtremoIzquierdo(padre->izq, nodo->izq);
+    }
+
+}
+
+nodoarbol ExtremoDerecho(nodoarbol padre, nodoarbol nodo){
+    if(nodo->der == NULL){
+        return padre;
+    }else{
+        ExtremoIzquierdo(padre->der, nodo->der);
+    }
+}
+
+nodoarbol BorrarNodoArbol(arbol ar, nodoarbol padre, nodoarbol nodo, string matricula)
+{
+    //nodoarbol padre;
+    //padre == NULL;
+
+    if (nodo != NULL)
+    {
+        if (nodo->matricula == matricula){
+
+            if(nodo->izq == NULL && nodo->der == NULL){ // Si es nodo hoja
+
+                if(padre->izq->matricula == nodo->matricula){ // Si raíz es la rama derecha de 'Padre'
+                    padre->izq = NULL;
+                } else if (padre->der->matricula == nodo->matricula){ // Si raíz es la rama izq de 'Padre
+                    padre->der = NULL;
+                } else if (padre == NULL){
+                    ar->raiz == NULL;
+                }
+
+                //nodo = NULL;
+
+                cout << "Borramos nodo hoja: " << nodo->matricula << endl;
+            }else{ // Si no es nodo hoja
+                nodoarbol nodo_aux, nodo_extremo;
+
+                if(nodo->matricula < ar->raiz->matricula){ // Si es de la parte izquierda del arbol
+
+                    nodo_extremo = ExtremoIzquierdo(padre,nodo);
+                    if(nodo_extremo->der->matricula == nodo->matricula){ // si el extremo es igual al nodo que queremos borrar
+                        nodo_aux = nodo->izq;
+                        //delete(nodo->izq);
+                        padre->der = nodo_aux;
+                    }else{
+                        padre->der = nodo_extremo->der;
+                    }
+
+                    //nodo = nodo_aux->der;
+                    nodo_aux->der = NULL;
+
+                }else{
+                    nodo_extremo = ExtremoIzquierdo(padre,nodo);
+                    if(nodo_extremo->izq->matricula == nodo->matricula){
+                        nodo_aux = nodo->izq;
+                        //delete(nodo->izq);
+                        padre->izq = nodo_aux;
+                    }else{
+                        padre->izq = nodo_extremo->izq;
+                    }
+                }
+
+                //nodo = nodoextremo;
+
+                cout << "Borramos nodo interno: " << nodo->matricula << endl;
+            }
+
+            return 0;
+
+        }
+        else
+        {
+            if (nodo->matricula < matricula) return(BorrarNodoArbol(ar, nodo, nodo->der,matricula));
+            else return(BorrarNodoArbol(ar, nodo, nodo->izq,matricula));
+        };
+    }else{
+        return 0;
     }
 }
