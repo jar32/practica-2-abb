@@ -238,91 +238,59 @@ int CalcularAltura(nodoarbol nodo){
 
 
 /***********************************************************************
-Función borrar un nodo
+Función borrar un nodo y Nodo extremo
 ***********************************************************************/
 
-nodoarbol ExtremoIzquierdo(nodoarbol padre, nodoarbol nodo){
 
-    if(nodo->izq == NULL){
-        return padre;
-    }else{
-        ExtremoIzquierdo(padre->izq, nodo->izq);
-    }
-
-}
-
-nodoarbol ExtremoDerecho(nodoarbol padre, nodoarbol nodo){
-    if(nodo->der == NULL){
-        return padre;
-    }else{
-        ExtremoIzquierdo(padre->der, nodo->der);
-    }
-}
-
-nodoarbol BorrarNodoArbol(arbol ar, nodoarbol padre, nodoarbol nodo, string matricula)
+nodoarbol NodoExtremo(nodoarbol root)
 {
-    //nodoarbol padre;
-    //padre == NULL;
+    if (root == NULL)
+        return NULL;
 
-    if (nodo != NULL)
+    while (root->der != NULL)
     {
-        if (nodo->matricula == matricula){
+        root = root->der;
+    }
+    return root;
+}
 
-            if(nodo->izq == NULL && nodo->der == NULL){ // Si es nodo hoja
 
-                if(padre->izq->matricula == nodo->matricula){ // Si raíz es la rama derecha de 'Padre'
-                    padre->izq = NULL;
-                } else if (padre->der->matricula == nodo->matricula){ // Si raíz es la rama izq de 'Padre
-                    padre->der = NULL;
-                } else if (padre == NULL){
-                    ar->raiz == NULL;
-                }
+nodoarbol BorrarNodoArbol(nodoarbol raiz, string matricula)
+{
+    if (raiz == NULL) return raiz;
 
-                //nodo = NULL;
+    else if (raiz->matricula == matricula){
 
-                cout << "Borramos nodo hoja: " << nodo->matricula << endl;
-            }else{ // Si no es nodo hoja
-                nodoarbol nodo_aux, nodo_extremo;
+        if (raiz->der == NULL && raiz->izq == NULL){ // Si es nodo hoja
+            delete raiz;
+            raiz = NULL;
+        }
 
-                if(nodo->matricula < ar->raiz->matricula){ // Si es de la parte izquierda del arbol
-
-                    nodo_extremo = ExtremoIzquierdo(padre,nodo);
-                    if(nodo_extremo->der->matricula == nodo->matricula){ // si el extremo es igual al nodo que queremos borrar
-                        nodo_aux = nodo->izq;
-                        //delete(nodo->izq);
-                        padre->der = nodo_aux;
-                    }else{
-                        padre->der = nodo_extremo->der;
-                    }
-
-                    //nodo = nodo_aux->der;
-                    nodo_aux->der = NULL;
-
-                }else{
-                    nodo_extremo = ExtremoIzquierdo(padre,nodo);
-                    if(nodo_extremo->izq->matricula == nodo->matricula){
-                        nodo_aux = nodo->izq;
-                        //delete(nodo->izq);
-                        padre->izq = nodo_aux;
-                    }else{
-                        padre->izq = nodo_extremo->izq;
-                    }
-                }
-
-                //nodo = nodoextremo;
-
-                cout << "Borramos nodo interno: " << nodo->matricula << endl;
+        else{ // Si  NO es nodo hoja
+            if (raiz->der == NULL){ // Hijo izquierda
+                nodoarbol nodo_aux = raiz;
+                raiz = raiz->izq;
+                delete nodo_aux;
+            }
+            else if (raiz->izq == NULL){ // Hijo derecha
+                nodoarbol nodo_aux = raiz;
+                raiz = raiz->der;
+                delete nodo_aux;
             }
 
-            return 0;
-
+            else // tiene 2 nodos
+            {
+                nodoarbol extremo = NodoExtremo(raiz->izq);
+                raiz->matricula = extremo->matricula;
+                raiz->izq = BorrarNodoArbol(raiz->izq, extremo->matricula);
+            }
         }
-        else
-        {
-            if (nodo->matricula < matricula) return(BorrarNodoArbol(ar, nodo, nodo->der,matricula));
-            else return(BorrarNodoArbol(ar, nodo, nodo->izq,matricula));
-        };
-    }else{
-        return 0;
-    }
+
+    }else if (matricula < raiz->matricula)
+        raiz->izq = BorrarNodoArbol(raiz->izq, matricula);
+    else if (matricula > raiz->matricula)
+        raiz->der = BorrarNodoArbol(raiz->der, matricula);
+
+
+    return raiz;
 }

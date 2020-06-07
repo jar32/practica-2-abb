@@ -7,91 +7,70 @@ int main() {
     struct Tree *abeto; // Si, mi arbol binario es un abeto
     abeto = CrearArbol();
 
-    struct nodoA *nodo_aux;
-    nodo_aux = new struct nodoA;
-    nodo_aux->matricula = "2460BZM";
-    nodo_aux->tipo_vehiculo = 'G';
-    nodo_aux->marca = "Citroen";
-    nodo_aux->modelo = "Xantia";
-    nodo_aux->potencia = 110;
-    InsertarclaveArbol(abeto, nodo_aux);
-
-    struct nodoA *nodo_aux2;
-    nodo_aux2 = new struct nodoA;
-    nodo_aux2->matricula = "3000DPX";
-    nodo_aux2->tipo_vehiculo = 'G';
-    nodo_aux2->marca = "Renault";
-    nodo_aux2->modelo = "Laguna";
-    nodo_aux2->potencia = 125;
-    InsertarclaveArbol(abeto, nodo_aux2);
-
-    struct nodoA *nodo_aux3;
-    nodo_aux3 = new struct nodoA;
-    nodo_aux3->matricula = "1010AAA";
-    nodo_aux3->tipo_vehiculo = 'G';
-    nodo_aux3->marca = "BMW";
-    nodo_aux3->modelo = "320D";
-    nodo_aux3->potencia = 125;
-    InsertarclaveArbol(abeto, nodo_aux3);
-
-    struct nodoA *nodo_aux4;
-    nodo_aux4 = new struct nodoA;
-    nodo_aux4->matricula = "1010ZZZ";
-    nodo_aux4->tipo_vehiculo = 'G';
-    nodo_aux4->marca = "BMW";
-    nodo_aux4->modelo = "320D";
-    nodo_aux4->potencia = 125;
-    InsertarclaveArbol(abeto, nodo_aux4);
-
-    struct nodoA *nodo_aux6;
-    nodo_aux6 = new struct nodoA;
-    nodo_aux6->matricula = "2000AAA";
-    nodo_aux6->tipo_vehiculo = 'G';
-    nodo_aux6->marca = "FIAT";
-    nodo_aux6->modelo = "55";
-    nodo_aux6->potencia = 125;
-    InsertarclaveArbol(abeto, nodo_aux6);
-
-    struct nodoA *nodo_aux5;
-    nodo_aux5 = new struct nodoA;
-    nodo_aux5->matricula = "1999AAA";
-    nodo_aux5->tipo_vehiculo = 'G';
-    nodo_aux5->marca = "FIAT";
-    nodo_aux5->modelo = "55";
-    nodo_aux5->potencia = 125;
-    InsertarclaveArbol(abeto, nodo_aux5);
-
-    struct nodoA *nodo_aux7;
-    nodo_aux7 = new struct nodoA;
-    nodo_aux7->matricula = "2001AAA";
-    nodo_aux7->tipo_vehiculo = 'G';
-    nodo_aux7->marca = "FIAT";
-    nodo_aux7->modelo = "55";
-    nodo_aux7->potencia = 125;
-    InsertarclaveArbol(abeto, nodo_aux7);
-
-
-
-    cout << "Tipo de vehículo: {G,D,M,I}" << endl;
-//    InsertarclaveArbol(abeto, "5555PPP");
-//    InsertarclaveArbol(abeto, "9999ZZZ");
-//    InsertarclaveArbol(abeto, "1111ZZZ");
+    // Debug data
+//    struct nodoA *nodo_aux;
+//    nodo_aux = new struct nodoA;
+//    nodo_aux->matricula = "2460BZM";
+//    nodo_aux->tipo_vehiculo = 'G';
+//    nodo_aux->marca = "Citroen";
+//    nodo_aux->modelo = "Ds21";
+//    nodo_aux->potencia = 110;
+//    InsertarclaveArbol(abeto, nodo_aux);
 //
-//    string A = "9995ZZZ";
-//    const char *tab1 = A.c_str();
+//    struct nodoA *nodo_aux2;
+//    nodo_aux2 = new struct nodoA;
+//    nodo_aux2->matricula = "3000DPX";
+//    nodo_aux2->tipo_vehiculo = 'G';
+//    nodo_aux2->marca = "Renault";
+//    nodo_aux2->modelo = "Laguna";
+//    nodo_aux2->potencia = 125;
+//    InsertarclaveArbol(abeto, nodo_aux2);
 //
-//    string Z = "9994ZZZ";
-//    const char *tab2 = Z.c_str();
+//    struct nodoA *nodo_aux3;
+//    nodo_aux3 = new struct nodoA;
+//    nodo_aux3->matricula = "1010AAA";
+//    nodo_aux3->tipo_vehiculo = 'G';
+//    nodo_aux3->marca = "BMW";
+//    nodo_aux3->modelo = "320D";
+//    nodo_aux3->potencia = 125;
+//    InsertarclaveArbol(abeto, nodo_aux3);
 //
-//    if(A > Z){
-//        cout << "mayor" << endl;
-//        printf("(%d) greater than (%d)", tab1,tab2);
-//    }else{
-//        cout << "menor" << endl;
-//        printf("(%d) lower than (%d)", tab1,tab2);
-//    }
+//    struct nodoA *nodo_aux4;
+//    nodo_aux4 = new struct nodoA;
+//    nodo_aux4->matricula = "1010ZZZ";
+//    nodo_aux4->tipo_vehiculo = 'G';
+//    nodo_aux4->marca = "BMW";
+//    nodo_aux4->modelo = "320D";
+//    nodo_aux4->potencia = 125;
+//    InsertarclaveArbol(abeto, nodo_aux4);
 //
-//    std::cout << "Hello, World!" << std::endl;
+//    struct nodoA *nodo_aux5;
+//    nodo_aux5 = new struct nodoA;
+//    nodo_aux5->matricula = "2000AAA";
+//    nodo_aux5->tipo_vehiculo = 'G';
+//    nodo_aux5->marca = "Ferrari";
+//    nodo_aux5->modelo = "Italia";
+//    nodo_aux5->potencia = 125;
+//    InsertarclaveArbol(abeto, nodo_aux5);
+//
+//    struct nodoA *nodo_aux6;
+//    nodo_aux6 = new struct nodoA;
+//    nodo_aux6->matricula = "1999AAA";
+//    nodo_aux6->tipo_vehiculo = 'G';
+//    nodo_aux6->marca = "Fiat";
+//    nodo_aux6->modelo = "Panda";
+//    nodo_aux6->potencia = 125;
+//    InsertarclaveArbol(abeto, nodo_aux6);
+//
+//    struct nodoA *nodo_aux7;
+//    nodo_aux7 = new struct nodoA;
+//    nodo_aux7->matricula = "2001AAA";
+//    nodo_aux7->tipo_vehiculo = 'G';
+//    nodo_aux7->marca = "Skoda";
+//    nodo_aux7->modelo = "Octavia";
+//    nodo_aux7->potencia = 125;
+//    InsertarclaveArbol(abeto, nodo_aux7);
+
 
 
     /*******************************************************************************
@@ -204,7 +183,6 @@ int main() {
                 teclado, si existe en el árbol.
             *******************************************************************************/
 
-            // code...
             string matricula;
             bool resp;
 
@@ -212,13 +190,10 @@ int main() {
             cout << "Matricula: " << endl;
             cin >> matricula;
 
-            BorrarNodoArbol(abeto, NULL, abeto->raiz, matricula);
+            BorrarNodoArbol(abeto->raiz, matricula);
 
-//            if(resp){ // Si el vehículo existe
-//                cout << "Borrado con éxito" << endl;
-//            }else{
-//                cout << "No existe el vehiculo" << endl;
-//            }
+            cout << "Borrado con éxito" << endl;
+
 
         }else if(option == 'G'){
 
@@ -295,9 +270,9 @@ int main() {
                 matricula = generateID();
                 cout << i << ": " << matricula;
                 if(BusquedaclaveArbol(abeto->raiz,matricula)){
-                    //borrar aux
+
                     cout << " - Matricula " << i << " coincide! Procedemos al borrado" << endl;
-                    BorrarNodoArbol(abeto, NULL, abeto->raiz, matricula);
+                    BorrarNodoArbol(abeto->raiz, matricula);
                 }else{
                     cout << " - No existe " << endl;
                 }
