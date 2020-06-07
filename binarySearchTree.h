@@ -160,13 +160,25 @@ Función para determinar si un valor existe en el árbol
 ***********************************************************************/
 
 void preorden(nodoarbol nodo){
-    // code ...
+    if (nodo != NULL) {
+        cout << nodo->matricula << endl;
+        preorden(nodo->izq);
+        preorden(nodo->der);
+    }
 }
 
 void inorden(nodoarbol nodo){
-    // code ...
+    if (nodo != NULL) {
+        inorden(nodo->izq);
+        cout << nodo->matricula << endl;
+        inorden(nodo->der);
+    }
 }
 
 void postorden(nodoarbol nodo){
-    // code ...
+    if (nodo != NULL){
+        postorden(nodo->izq);
+        postorden(nodo->der);
+        cout << nodo->matricula << endl;
+    }
 }

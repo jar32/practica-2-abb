@@ -127,8 +127,14 @@ int main() {
                 de cualquier forma: anchura, profundidad (PRE, IN, POST ORDEN). El
                 recorrido en Inorden nos devolverá una secuencia ordenada de matrículas.
             *******************************************************************************/
+            cout << "\nRecorridos Preorden, Inorden y Postorden:" << endl;
+            cout << "\nPreorden:" << endl;
+            preorden(v1->raiz);
+            cout << "\nInorden:" << endl;
+            inorden(v1->raiz);
+            cout << "\nPostorden:" << endl;
+            postorden(v1->raiz);
 
-            // code...
 
         }else if(option == 'D'){
 
