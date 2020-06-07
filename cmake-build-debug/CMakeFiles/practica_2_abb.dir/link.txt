@@ -1,3 +1,0 @@
-C:\Users\Javier\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\201.7223.86\bin\cmake\win\bin\cmake.exe -E remove -f CMakeFiles\practica_2_abb.dir/objects.a
-C:\mingw-w64\mingw32\bin\ar.exe cr CMakeFiles\practica_2_abb.dir/objects.a @CMakeFiles\practica_2_abb.dir\objects1.rsp
-C:\mingw-w64\mingw32\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\practica_2_abb.dir/objects.a -Wl,--no-whole-archive  -o practica_2_abb.exe -Wl,--out-implib,libpractica_2_abb.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\practica_2_abb.dir\linklibs.rsp
