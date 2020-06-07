@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Javier/CLionProjects/practica-2-abb/binarySearchTree.h
+cstdlib
+-
+iostream
+-
+time.h
+-
+
+C:/Users/Javier/CLionProjects/practica-2-abb/functions.h
+iostream
+-
+
+C:/Users/Javier/CLionProjects/practica-2-abb/main.cpp
+iostream
+-
+binarySearchTree.h
+C:/Users/Javier/CLionProjects/practica-2-abb/binarySearchTree.h
+functions.h
+C:/Users/Javier/CLionProjects/practica-2-abb/functions.h
+

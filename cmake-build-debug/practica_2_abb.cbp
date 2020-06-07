@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/Javier/CLionProjects/practica-2-abb/binarySearchTree.h">
+			<Option target="practica_2_abb"/>
+		</Unit>
+		<Unit filename="C:/Users/Javier/CLionProjects/practica-2-abb/functions.h">
+			<Option target="practica_2_abb"/>
+		</Unit>
 		<Unit filename="C:/Users/Javier/CLionProjects/practica-2-abb/main.cpp">
 			<Option target="practica_2_abb"/>
 		</Unit>
