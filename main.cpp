@@ -4,8 +4,8 @@
 
 int main() {
 
-    struct Tree *v1;
-    v1 = CrearArbol();
+    struct Tree *abeto; // Si, mi arbol binario es un abeto
+    abeto = CrearArbol();
 
     struct nodoA *nodo_aux;
     nodo_aux = new struct nodoA;
@@ -14,7 +14,7 @@ int main() {
     nodo_aux->marca = "Citroen";
     nodo_aux->modelo = "Xantia";
     nodo_aux->potencia = 110;
-    InsertarclaveArbol(v1, nodo_aux);
+    InsertarclaveArbol(abeto, nodo_aux);
 
     struct nodoA *nodo_aux2;
     nodo_aux2 = new struct nodoA;
@@ -23,7 +23,7 @@ int main() {
     nodo_aux2->marca = "Renault";
     nodo_aux2->modelo = "Laguna";
     nodo_aux2->potencia = 125;
-    InsertarclaveArbol(v1, nodo_aux2);
+    InsertarclaveArbol(abeto, nodo_aux2);
 
     struct nodoA *nodo_aux3;
     nodo_aux3 = new struct nodoA;
@@ -32,12 +32,12 @@ int main() {
     nodo_aux3->marca = "BMW";
     nodo_aux3->modelo = "320D";
     nodo_aux3->potencia = 125;
-    InsertarclaveArbol(v1, nodo_aux3);
+    InsertarclaveArbol(abeto, nodo_aux3);
 
     cout << "Tipo de vehículo: {G,D,M,I}" << endl;
-//    InsertarclaveArbol(v1, "5555PPP");
-//    InsertarclaveArbol(v1, "9999ZZZ");
-//    InsertarclaveArbol(v1, "1111ZZZ");
+//    InsertarclaveArbol(abeto, "5555PPP");
+//    InsertarclaveArbol(abeto, "9999ZZZ");
+//    InsertarclaveArbol(abeto, "1111ZZZ");
 //
 //    string A = "9995ZZZ";
 //    const char *tab1 = A.c_str();
@@ -94,7 +94,7 @@ int main() {
             cin >> nodo_aux->potencia;
 
             // Insertar
-            InsertarclaveArbol(v1, nodo_aux);
+            InsertarclaveArbol(abeto, nodo_aux);
 
         }else if(option == 'B'){
 
@@ -111,7 +111,7 @@ int main() {
             cout << "Matricula: " << endl;
             cin >> aux;
 
-            nodo_aux = DevolverclaveArbol(v1->raiz, aux);
+            nodo_aux = DevolverclaveArbol(abeto->raiz, aux);
 
             if(nodo_aux != 0){ // Si el vehículo existe
                 printVehicle(nodo_aux);
@@ -129,11 +129,11 @@ int main() {
             *******************************************************************************/
             cout << "\nRecorridos Preorden, Inorden y Postorden:" << endl;
             cout << "\nPreorden:" << endl;
-            preorden(v1->raiz);
+            preorden(abeto->raiz);
             cout << "\nInorden:" << endl;
-            inorden(v1->raiz);
+            inorden(abeto->raiz);
             cout << "\nPostorden:" << endl;
-            postorden(v1->raiz);
+            postorden(abeto->raiz);
 
 
         }else if(option == 'D'){
@@ -141,8 +141,19 @@ int main() {
             /*******************************************************************************
             D)  Determinar el grado del árbol (número de nodos que tiene)
             *******************************************************************************/
+            // NOTA: La definición de grado de un árbol:
+            // Grado de un árbol: se corresponde con el máximo del grado de sus nodos.
+            // - Árboles binarios: árboles de grado 2 (máximo de 2 hijos por nodo)
 
-            // code...
+            int grado, total;
+
+            cout << "Estadísticas" << endl;
+
+            grado = calcularGradoArbol(abeto->raiz);
+            cout << "Grado del arbol:" << grado << endl;
+
+            total = calcularNumNodos(abeto->raiz);
+            cout << "Numero de nodos del arbol:" << total << endl;
 
         }else if(option == 'E'){
 

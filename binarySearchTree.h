@@ -156,7 +156,7 @@ nodoarbol DevolverclaveArbol(nodoarbol nodo, string matricula)
 }
 
 /***********************************************************************
-Función para determinar si un valor existe en el árbol
+Funciones de recorrido Pre, In y Post orden
 ***********************************************************************/
 
 void preorden(nodoarbol nodo){
@@ -180,5 +180,40 @@ void postorden(nodoarbol nodo){
         postorden(nodo->izq);
         postorden(nodo->der);
         cout << nodo->matricula << endl;
+    }
+}
+
+/***********************************************************************
+Grado de un árbol: se corresponde con el máximo del grado de sus nodos.
+***********************************************************************/
+
+int calcularGradoArbol(nodoarbol nodo){
+    if (nodo == NULL)
+        return 0;
+
+    // profundidad en los dos caminos
+    int maxIzq = calcularGradoArbol(nodo->izq);
+    int maxDer = calcularGradoArbol(nodo->der);
+
+    // devolver el máximo
+    if (maxIzq > maxDer)
+        return maxIzq + 1;
+    else
+        return maxDer + 1;
+}
+
+/***********************************************************************
+Número de nodos de un árbol
+***********************************************************************/
+
+int calcularNumNodos(nodoarbol nodo){
+    int cont = 1; //El nodo raiz se cuenta
+    if (nodo == NULL)
+        return 0;
+    else
+    {
+        cont += calcularNumNodos(nodo->izq);
+        cont += calcularNumNodos(nodo->der);
+        return cont;
     }
 }
